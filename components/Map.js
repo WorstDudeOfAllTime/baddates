@@ -13,7 +13,7 @@ const Map = ({ data, setStory }) => {
 
   return (
     <>
-      <LoadScript googleMapsApiKey="AIzaSyB_7-2HzwVxYlzeq99FYx3uhDj8ivG9YT0">
+      <LoadScript googleMapsApiKey={}>
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={14}>
         {data.map((location, index) => {
           console.log(location);

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Geocode from 'react-geocode';
 import Map from '../components/Map';
 import OverlayBox from '../components/OverlayBox';
-Geocode.setApiKey('AIzaSyB_7-2HzwVxYlzeq99FYx3uhDj8ivG9YT0');
+Geocode.setApiKey({});
 Geocode.setLanguage('en');
 export default function Home({ allDates }) {
   const getAddress = async (long, lat) => {
