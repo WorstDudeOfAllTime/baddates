@@ -1,89 +1,174 @@
 import { useState } from 'react';
 import styles from './../styles/OverlayBox.module.css';
+import Geocode from 'react-geocode';
+import Image from 'next/image';
+import logo from './../components/imgs/logo-no-background.png';
+import Comment from './../components/Comment';
 const OverlayBox = ({
-  newLat,
-  setNewLat,
-  newLong,
-  setNewLong,
-  story,
   setNewStory,
   newStory,
+  theAddress,
+  setTheAddress,
+  setCenter,
+  center,
+  story,
+  locationID,
+  commentList,
+  setNewComments,
+  newComments,
 }) => {
-  const [storyMode, setStoryMode] = useState(false);
-  const getDates = async () => {
-    console.log('Fired');
-    const response = await fetch('/api/finddates', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    console.log(response);
-    const data = await response.json();
-    console.log(data.data);
-  };
-  const submitForm = async (e) => {
-    e.preventDefault();
-    let res = await fetch('/api/writedate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        lat: newLat,
-        long: newLong,
-        story: newStory,
-      }),
-    });
-  };
-  return (
-    <div className={styles.overlayBox}>
-      {storyMode ? (
-        <></>
-      ) : (
-        <>
-          <div className={styles.headBox}>
-            <h1>Bad Dates</h1>
-          </div>
-          <div className={styles.theForm}>
-            <h3>Enter Address</h3>
-            <form
-              onSubmit={(e) => {
-                submitForm(e);
-              }}
-            >
-              <input
-                value={newLat}
-                onChange={(e) => {
-                  setNewLat(e.target.value);
-                }}
-              ></input>
-              <input
-                value={newLong}
-                onChange={(e) => {
-                  setNewLong(e.target.value);
-                }}
-              ></input>
-              <input
-                value={newStory}
-                onChange={(e) => {
-                  setNewStory(e.target.value);
-                }}
-              ></input>
-              <button>Submit</button>
-            </form>
-          </div>
+  const [successMessage, setSuccessMessage] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [comment, setComment] = useState('');
 
-          <div className={styles.storyBox}>
-            {story && <p>{story}</p>}
+  //FUNCTIONS//
+  const submitAddress = async () => {
+    try {
+      let localAddress = `${street} ${city}, ${state}`;
+      const response = await Geocode.fromAddress(localAddress);
+      const { lat, lng } = await response.results[0].geometry.location;
+      console.log(response.results[0].geometry)
+      setTheAddress(localAddress);
+      setCenter({ lat, lng });
+    } catch(err){
+      console.log(err)
+    }
+
+  };
+  const submitStory = async () => {
+    try {
+      const response = fetch('api/writedate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          lat: center.lat,
+          lng: center.lng,
+          newStory,
+        }),
+      });
+      setSuccessMessage('story posted!');
+      setTheAddress(null);
+      setNewStory('');
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //const submitComments = async (comment) => {
+  //  const response = fetch('api/writecomment', {
+   //   method: 'POST',
+   //   headers: {
+    //    'Content-Type': 'application/json',
+      //},
+  //    body: JSON.stringify({
+   //     comment: comment,
+  //      storyID: locationID,
+  //    }),
+  //  });
+ // };
+  const clearInputs = () => {
+    setStreet('');
+    setCity('');
+    setState('');
+  };
+  //END FUNCTIONS
+
+  return (
+    <div className={`flexCentCol ${styles.overlayBox}`}>
+      <div className={styles.headBox}>
+        <Image src={logo} alt="logo" height={55} />
+      </div>
+      <div className={styles.theForm}>
+        {theAddress != null ? (
+          <>
+            <h3>{theAddress}</h3>
             <button
               onClick={() => {
-                setStoryMode(true);
+                setTheAddress(null);
+                clearInputs();
               }}
             >
-              Add a Story!
+              Change Address
             </button>
-          </div>
-        </>
-      )}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                clearInputs();
+                submitStory();
+              }}
+            >
+              <label htmlFor="story">
+                Input your story:
+                <textarea
+                  type="text"
+                  id="story"
+                  required={true}
+                  value={newStory}
+                  style={{
+                    height: '200px',
+                  }}
+                  onChange={(e) => {
+                    setNewStory(e.target.value);
+                  }}
+                ></textarea>
+              </label>
+              <button>Submit Story</button>
+            </form>
+          </>
+        ) : (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submitAddress();
+            }}
+          >
+            <label htmlFor="addressInput">
+              Add your location:
+              <input
+                type="text"
+                required={true}
+                id="addressInput"
+                value={street}
+                onChange={(e) => {
+                  setStreet(e.target.value);
+                }}
+                placeholder="Address/Location"
+              ></input>
+              <input
+                type="text"
+                required={true}
+                id="addressInput"
+                value={city}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
+                placeholder="City"
+              ></input>
+              <input
+                type="text"
+                required={true}
+                id="stat"
+                value={state}
+                onChange={(e) => {
+                  setState(e.target.value);
+                }}
+                placeholder="State"
+              ></input>
+            </label>
+            <button>Submit Address</button>
+          </form>
+        )}
+      </div>
+      <h3>{successMessage}</h3>
+      <div className={styles.storyBox}>
+        <p style={{ color: 'white' }}>{story}</p>
+      </div>
     </div>
   );
 };

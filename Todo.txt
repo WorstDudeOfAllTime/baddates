@@ -1,0 +1,5 @@
+// Add a secondary collection for comments - all of this will be anonymous
+// Add filter for language
+// no pictures - no links
+// Get the location business name based on the place_ID
+// turn the marker in to a heart

@@ -1,0 +1,9 @@
+.commentBox{
+  border-bottom: 1px solid whitesmoke;
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+}
+.commentBox p{
+  font-size: 12px;
+}

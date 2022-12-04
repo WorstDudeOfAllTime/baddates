@@ -3,3 +3,18 @@
   height: 100vh;
   width: 100vw;
 }
+.accept{
+  position: absolute;
+  z-index: 4;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, .4);
+}
+.discBox{
+  height: 400px;
+  width: 300px;
+  background: black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+  text-align: center;
+}
