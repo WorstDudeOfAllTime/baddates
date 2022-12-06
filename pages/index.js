@@ -89,13 +89,9 @@ export default function Home({ allDates }) {
 }
 
 export async function getServerSideProps() {
-  let response = await fetch('http:/localhost:3000/api/finddates', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  let response = await fetch('http:/localhost:3000/api/finddates');
   let allDates = await response.json();
+  console.log(allDates);
   return {
     props: { allDates },
   };

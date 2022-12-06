@@ -29,15 +29,15 @@ const OverlayBox = ({
       let localAddress = `${street} ${city}, ${state}`;
       const response = await Geocode.fromAddress(localAddress);
       const { lat, lng } = await response.results[0].geometry.location;
-      console.log(response.results[0].geometry)
+      console.log(response.results[0].geometry);
       setTheAddress(localAddress);
       setCenter({ lat, lng });
-    } catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-
   };
   const submitStory = async () => {
+    console.log('fired');
     try {
       const response = fetch('api/writedate', {
         method: 'POST',
@@ -45,9 +45,10 @@ const OverlayBox = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          location: 'Boot and Saddle',
           lat: center.lat,
           lng: center.lng,
-          newStory,
+          story: newStory,
         }),
       });
       setSuccessMessage('story posted!');
@@ -62,16 +63,16 @@ const OverlayBox = ({
   };
   //const submitComments = async (comment) => {
   //  const response = fetch('api/writecomment', {
-   //   method: 'POST',
-   //   headers: {
-    //    'Content-Type': 'application/json',
-      //},
+  //   method: 'POST',
+  //   headers: {
+  //    'Content-Type': 'application/json',
+  //},
   //    body: JSON.stringify({
-   //     comment: comment,
+  //     comment: comment,
   //      storyID: locationID,
   //    }),
   //  });
- // };
+  // };
   const clearInputs = () => {
     setStreet('');
     setCity('');

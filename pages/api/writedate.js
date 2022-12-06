@@ -1,7 +1,13 @@
-import clientPromise from './../../lib/mongodb'
+import mongoDB from './../../lib/mongodb';
+import BadDateModel from '../../Models/BadDateModel';
 export default async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db('bad-dates-db');
-  let bodyObject = req.body
-  let myDate = await db.collection('dates').insertOne(bodyObject);
+  console.log(req.body)
+  const baddate = new BadDateModel(req.body);
+  try {
+    baddate.save();
+    res.json({data: baddate});
+  }catch(err){
+    console.log(err);
+  }
+
 }

@@ -33,9 +33,10 @@ const MarkerComp = ({
         lng: parseFloat(location.lng),
       }}
       onClick={() => {
-        setStory(location.newStory);
+        console.log(location);
+        setStory(location.story);
         setLocationID(location._id);
-        commentFetcher();
+        //commentFetcher();
         setCenter({
           lat: parseFloat(location.lat),
           lng: parseFloat(location.lng),

@@ -1,15 +1,12 @@
-import clientPromise from './../../lib/mongodb';
-
-
-
+import mongoDB from './../../lib/mongodb';
+import BadDateModel from '../../Models/BadDateModel'
 export default async function handler(req, res) {
   try {
     switch (req.method) {
       case 'GET':
-        const client = await clientPromise;
-        const db = client.db('bad-dates-db');
-        let myDates = await db.collection('dates').find({}).toArray();
-        res.json({data: myDates});
+        let myDates = await BadDateModel.find({});
+        console.log(`myDates :${myDates}`);
+        res.status(200).json({data: myDates});
     }
   } catch (err) {
     console.log('THERE WAS AN ERROR');
