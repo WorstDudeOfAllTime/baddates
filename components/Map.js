@@ -2,7 +2,8 @@ import {
   GoogleMap,
   LoadScript,
   StandaloneSearchBox,
-  Autocomplete
+  Autocomplete,
+  Marker
 } from '@react-google-maps/api';
 import { useState } from 'react';
 import MarkerComp from './MarkerComp';
@@ -20,7 +21,7 @@ const Map = ({
   newComments,
 }) => {
   const [mapPlace, setMapPlace] = useState('');
-
+  const [currentLocation, setCurrentLocation] = useState(false);
   const containerStyle = {
     width: '95%',
     height: '95%',
@@ -64,6 +65,8 @@ const Map = ({
               onSubmit={(e) => {
                 e.preventDefault();
                 submitAddress(mapPlace);
+                setMapPlace('');
+                setCurrentLocation(true);
               }}
             >
               <input
@@ -93,6 +96,10 @@ const Map = ({
               />
             );
           })}
+          {currentLocation && <Marker position={{
+        lat: center.lat,
+        lng: center.lng,
+      }}/>}
         </GoogleMap>
       </LoadScript>
     </div>
