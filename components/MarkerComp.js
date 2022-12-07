@@ -26,6 +26,8 @@ const MarkerComp = ({
       console.log(err);
     }
   };
+
+
   return (
     <MarkerF
       position={{
@@ -37,6 +39,7 @@ const MarkerComp = ({
         setStory(location.story);
         setLocationID(location._id);
         //commentFetcher();
+        console.log()
         setCenter({
           lat: parseFloat(location.lat),
           lng: parseFloat(location.lng),

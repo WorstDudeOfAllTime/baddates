@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import styles from './../styles/OverlayBox.module.css';
 import Geocode from 'react-geocode';
-import Image from 'next/image';
-import logo from './../components/imgs/logo-no-background.png';
 import Comment from './../components/Comment';
 const OverlayBox = ({
   setNewStory,
@@ -18,9 +16,6 @@ const OverlayBox = ({
   newComments,
 }) => {
   const [successMessage, setSuccessMessage] = useState('');
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
   const [comment, setComment] = useState('');
 
   //FUNCTIONS//
@@ -82,21 +77,10 @@ const OverlayBox = ({
 
   return (
     <div className={`flexCentCol ${styles.overlayBox}`}>
-      <div className={styles.headBox}>
-        <Image src={logo} alt="logo" height={55} />
-      </div>
+      <div className={styles.headBox}></div>
       <div className={styles.theForm}>
-        {theAddress != null ? (
+        {theAddress != null && (
           <>
-            <h3>{theAddress}</h3>
-            <button
-              onClick={() => {
-                setTheAddress(null);
-                clearInputs();
-              }}
-            >
-              Change Address
-            </button>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -122,48 +106,6 @@ const OverlayBox = ({
               <button>Submit Story</button>
             </form>
           </>
-        ) : (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitAddress();
-            }}
-          >
-            <label htmlFor="addressInput">
-              Add your location:
-              <input
-                type="text"
-                required={true}
-                id="addressInput"
-                value={street}
-                onChange={(e) => {
-                  setStreet(e.target.value);
-                }}
-                placeholder="Address/Location"
-              ></input>
-              <input
-                type="text"
-                required={true}
-                id="addressInput"
-                value={city}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                }}
-                placeholder="City"
-              ></input>
-              <input
-                type="text"
-                required={true}
-                id="stat"
-                value={state}
-                onChange={(e) => {
-                  setState(e.target.value);
-                }}
-                placeholder="State"
-              ></input>
-            </label>
-            <button>Submit Address</button>
-          </form>
         )}
       </div>
       <h3>{successMessage}</h3>
