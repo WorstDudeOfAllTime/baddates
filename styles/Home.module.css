@@ -27,11 +27,11 @@
 }
 .storyBox{
   height: 90%;
-  width: 15%;
+  width: 20%;
 }
 .mapBox {
   height: 95%;
-  width: 85%;
+  width: 80%;
 }
 
 @keyframes fadeIn {

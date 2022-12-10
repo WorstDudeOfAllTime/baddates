@@ -31,31 +31,7 @@ const OverlayBox = ({
       console.log(err);
     }
   };
-  const submitStory = async () => {
-    console.log('fired');
-    try {
-      const response = fetch('api/writedate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          location: 'Boot and Saddle',
-          lat: center.lat,
-          lng: center.lng,
-          story: newStory,
-        }),
-      });
-      setSuccessMessage('story posted!');
-      setTheAddress(null);
-      setNewStory('');
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   //const submitComments = async (comment) => {
   //  const response = fetch('api/writecomment', {
   //   method: 'POST',

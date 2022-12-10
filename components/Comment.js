@@ -1,9 +1,8 @@
 import styles from './../styles/Comment.module.css'
 
-const Comment = ({ story }) => {
+const Comment = ({comment}) => {
   return (
     <div className={styles.commentBox} >
-      <p>{story}</p>
     </div>
   );
 };

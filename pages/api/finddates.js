@@ -8,7 +8,6 @@ export default async function handler(req, res) {
         res.status(200).json({data: myDates});
     }
   } catch (err) {
-    console.log('THERE WAS AN ERROR');
     console.log(err);
   }
 }

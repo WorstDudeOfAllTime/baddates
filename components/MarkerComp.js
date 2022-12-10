@@ -8,7 +8,7 @@ const MarkerComp = ({
   setCenter,
   setLocationID,
   setCommentList,
-  newComments,
+  setTheAddress
 }) => {
 
   const commentFetcher = async () => {
@@ -30,19 +30,16 @@ const MarkerComp = ({
   };
   return (
     <MarkerF
-    animation={1}
-    
-    className={styles.leaningHeart}
+    animation={2}
       position={{
         lat: parseFloat(location.lat),
         lng: parseFloat(location.lng),
       }}
       onClick={() => {
-        console.log(location);
-        setStory(location.story);
+        setStory(prevStory => {
+          return [location.story]
+        });
         setLocationID(location._id);
-        //commentFetcher();
-        console.log()
         setCenter({
           lat: parseFloat(location.lat),
           lng: parseFloat(location.lng),

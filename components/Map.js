@@ -3,7 +3,8 @@ import {
   LoadScript,
   StandaloneSearchBox,
   Autocomplete,
-  Marker
+  Marker,
+  MarkerF,
 } from '@react-google-maps/api';
 import { useState } from 'react';
 import MarkerComp from './MarkerComp';
@@ -19,12 +20,15 @@ const Map = ({
   setLocationID,
   setCommentList,
   newComments,
+  setTheAddress,
 }) => {
   const [mapPlace, setMapPlace] = useState('');
   const [currentLocation, setCurrentLocation] = useState(false);
+  const [clickMarker, setClickMarker] = useState(false);
+  const [clickLatLng, setClickLatLng] = useState({ lat: 0, lng: 0 });
   const containerStyle = {
-    width: '95%',
-    height: '95%',
+    width: '98%',
+    height: '98%',
     border: '10px solid red',
     borderBottomRightRadius: '20px',
   };
@@ -54,16 +58,31 @@ const Map = ({
     }
   };
   return (
-    <div className={`flexCent`} style={{ height: '100%', width: '100%' }}>
+    <div
+      className={`flexCent`}
+      style={{ height: '100%', width: '100%', margin: '0' }}
+    >
       <LoadScript
         googleMapsApiKey={process.env.NEXT_PUBLIC_GM_API}
         libraries={libraries}
       >
-        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={14}>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={14}
+          onClick={(e) => {
+            console.log(clickLatLng);
+            setClickLatLng((prevLatLng) => {
+              return { lat: e.latLng.lat(), lng: e.latLng.lng() };
+            });
+            setClickMarker(true);
+          }}
+        >
           <StandaloneSearchBox>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                setTheAddress(mapPlace);
                 submitAddress(mapPlace);
                 setMapPlace('');
                 setCurrentLocation(true);
@@ -93,13 +112,26 @@ const Map = ({
                 setLocationID={setLocationID}
                 setCommentList={setCommentList}
                 newComments={newComments}
+                setTheAddress={setTheAddress}
               />
             );
           })}
-          {currentLocation && <Marker position={{
-        lat: center.lat,
-        lng: center.lng,
-      }}/>}
+          {currentLocation && (
+            <Marker
+              position={{
+                lat: center.lat,
+                lng: center.lng,
+              }}
+            />
+          )}
+          {clickMarker && (
+            <MarkerF
+              position={{
+                lat: clickLatLng.lat,
+                lng: clickLatLng.lng,
+              }}
+            />
+          )}
         </GoogleMap>
       </LoadScript>
     </div>

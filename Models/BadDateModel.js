@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const BadDateSchema = new mongoose.Schema({
   location: { type: String, required: true },
+  address: {type:String, required: true},
   lat: { type: Number, required: true },
   lng: { type: Number, required: true },
   date: { type: Date, default: Date.now },
