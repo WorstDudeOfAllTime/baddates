@@ -3,6 +3,8 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
 }
 .accept{
   position: absolute;
@@ -30,4 +32,9 @@
 .mapBox {
   height: 95%;
   width: 85%;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
 }

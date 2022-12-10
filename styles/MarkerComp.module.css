@@ -1,0 +1,9 @@
+.leaningHearts{
+  animation-name: leaningHeart;
+  animation-duration: 3s  ;
+}
+
+@keyframes leaningHeart{
+  from {transform: rotate(90deg)}
+  to {transform: rotate(170deg)}
+}

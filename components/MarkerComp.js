@@ -1,5 +1,7 @@
 import { MarkerF } from '@react-google-maps/api';
 import { useEffect } from 'react';
+import heart from './imgs/heart.png'
+import styles from './../styles/MarkerComp.module.css'
 const MarkerComp = ({
   location,
   setStory,
@@ -26,10 +28,11 @@ const MarkerComp = ({
       console.log(err);
     }
   };
-
-
   return (
     <MarkerF
+    animation={1}
+    
+    className={styles.leaningHeart}
       position={{
         lat: parseFloat(location.lat),
         lng: parseFloat(location.lng),
