@@ -1,4 +1,5 @@
 // how to handle cases in which dates happened at the same place
+// ^ how to handle the information being sent 
 // comments
 // comments/ stories/ places
 

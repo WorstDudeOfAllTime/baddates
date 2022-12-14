@@ -1,7 +1,9 @@
 import styles from './../styles/StoryBoard.module.css';
 import StoryBox from './StoryBox';
 import StoryForm from './StoryForm';
-const StoryBoard = ({ stories, address }) => {
+import Comment from './Comment';
+import CommentForm from './CommentForm';
+const StoryBoard = ({ stories, address, lat, lng, theLocation }) => {
   return (
     <div className={styles.storyBoardContainer}>
       <div className={`flexCentCol ${styles.whereBox}`}>
@@ -15,7 +17,14 @@ const StoryBoard = ({ stories, address }) => {
           stories.map((story) => {
             return <StoryBox story={story} />;
           })}
-        {address != null && <StoryForm address={address} />}
+        {address != null && (
+          <StoryForm
+            address={address}
+            lat={lat}
+            lng={lng}
+            theLocation={theLocation}
+          />
+        )}
       </div>
     </div>
   );

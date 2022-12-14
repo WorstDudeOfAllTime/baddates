@@ -1,28 +1,74 @@
 import { useFormik } from 'formik';
-const StoryForm = ({ address }) => {
+import uniqueString from 'unique-string';
+const StoryForm = ({ theLocation, address, lat, lng }) => {
+  const submitStory = async (values) => {
+    try {
+      const data = await fetch('/api/writedate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const submitLocation = async (values) => {
+    try {
+      const data = await fetch('/api/writelocation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const formik = useFormik({
     initialValues: {
-      address,
-      location: 'boot and saddle',
-      lat: 39.245,
-      lng: -75.123,
+      address: address,
+      location: '',
+      location_Id: !theLocation ? uniqueString() : theLocation.location_Id,
+      date_Id: uniqueString(),
+      lat,
+      lng,
       date: Date.now(),
       story: '',
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      if (theLocation) {
+        submitStory(values);
+      } else {
+        submitStory(values);
+        submitLocation(values);
+      }
     },
   });
   return (
-    <div style={{height: '100%'}}>
+    <div style={{ height: '100%' }}>
       <form className={'flexCentCol'} onSubmit={formik.handleSubmit}>
-        <label htmlFor="story">Enter your Story</label>
+        <label style={{ width: '174px' }} htmlFor="location">
+          Enter Place
+        </label>
         <input
+          type="text"
+          name="location"
+          onChange={formik.handleChange}
+          value={formik.values.location}
+        ></input>
+        <label style={{ width: '174px' }} htmlFor="story">
+          Enter your Story
+        </label>
+        <textarea
+          style={{ height: '200px' }}
           id="story"
           name="story"
           onChange={formik.handleChange}
           value={formik.values.story}
-        ></input>
+        ></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>

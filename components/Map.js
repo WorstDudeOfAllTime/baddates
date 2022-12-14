@@ -21,6 +21,7 @@ const Map = ({
   setCommentList,
   newComments,
   setTheAddress,
+  setTheLocation,
 }) => {
   const [mapPlace, setMapPlace] = useState('');
   const [currentLocation, setCurrentLocation] = useState(false);
@@ -57,6 +58,16 @@ const Map = ({
       console.log(err);
     }
   };
+
+  const getAddress = async (lat, long) => {
+    try {
+      const response = await Geocode.fromLatLng(lat, long);
+      console.log(response.results[0].formatted_address);
+      setTheAddress((prevAdd) => {
+        return response.results[0].formatted_address;
+      });
+    } catch (err) {}
+  };
   return (
     <div
       className={`flexCent`}
@@ -71,8 +82,13 @@ const Map = ({
           center={center}
           zoom={14}
           onClick={(e) => {
-            console.log(clickLatLng);
+            setStory([]);
+            setTheLocation(null);
+            getAddress(e.latLng.lat(), e.latLng.lng());
             setClickLatLng((prevLatLng) => {
+              return { lat: e.latLng.lat(), lng: e.latLng.lng() };
+            });
+            setCenter((prevCenter) => {
               return { lat: e.latLng.lat(), lng: e.latLng.lng() };
             });
             setClickMarker(true);
@@ -113,6 +129,7 @@ const Map = ({
                 setCommentList={setCommentList}
                 newComments={newComments}
                 setTheAddress={setTheAddress}
+                setTheLocation={setTheLocation}
               />
             );
           })}
