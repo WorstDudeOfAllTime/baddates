@@ -1,4 +1,4 @@
-import { useFormik } from 'formik';
+import { useFormik, resetForm } from 'formik';
 import uniqueString from 'unique-string';
 const StoryForm = ({ theLocation, address, lat, lng }) => {
   const submitStory = async (values) => {
@@ -15,6 +15,7 @@ const StoryForm = ({ theLocation, address, lat, lng }) => {
     }
   };
   const submitLocation = async (values) => {
+    console.log(values);
     try {
       const data = await fetch('/api/writelocation', {
         method: 'POST',
@@ -41,24 +42,32 @@ const StoryForm = ({ theLocation, address, lat, lng }) => {
     onSubmit: (values) => {
       if (theLocation) {
         submitStory(values);
+        formik.resetForm();
       } else {
         submitStory(values);
         submitLocation(values);
+        formik.resetForm();
       }
     },
   });
   return (
     <div style={{ height: '100%' }}>
       <form className={'flexCentCol'} onSubmit={formik.handleSubmit}>
-        <label style={{ width: '174px' }} htmlFor="location">
-          Enter Place
-        </label>
-        <input
-          type="text"
-          name="location"
-          onChange={formik.handleChange}
-          value={formik.values.location}
-        ></input>
+        {theLocation === null ? (
+          <>
+            <label style={{ width: '174px' }} htmlFor="location">
+              Enter Place
+            </label>
+            <input
+              type="text"
+              name="location"
+              onChange={formik.handleChange}
+              value={formik.values.location}
+            ></input>
+          </>
+        ) : (
+          <></>
+        )}
         <label style={{ width: '174px' }} htmlFor="story">
           Enter your Story
         </label>
