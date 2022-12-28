@@ -1,8 +1,16 @@
-import { useFormik } from 'formik';
-import { Formik } from 'formik';
-import { useState } from 'react';
 import uniqueString from 'unique-string';
-const StoryForm = ({ theLocation, center, setTheLocation, setTheAddress, lat, lng }) => {
+import { useState } from 'react';
+const StoryFormRedux = ({
+  theLocation,
+  center,
+  setTheLocation,
+  setTheAddress,
+  lat,
+  lng,
+}) => {
+  const [story, setStory] = useState('');
+  const [place, setPlace] = useState('');
+  console.log(theLocation);
   const submitStory = async (values) => {
     try {
       const data = await fetch('/api/writedate', {
@@ -29,31 +37,34 @@ const StoryForm = ({ theLocation, center, setTheLocation, setTheAddress, lat, ln
       console.log(err);
     }
   };
-  const formik = useFormik({
-    initialValues: {
-      location: !theLocation ? '' : theLocation.location,
+  const handleSubmit = () => {
+    let values = {
+      location: !theLocation ? place : theLocation.location,
       location_Id: !theLocation ? uniqueString() : theLocation.location_Id,
       date_Id: uniqueString(),
-      lat: lat,
-      lng: lng,
+      lat: center.lat,
+      lng: center.lng,
       date: Date.now(),
-      story: '',
-    },
-    onSubmit: (values) => {
-      if (theLocation) {
-        submitStory(values);
-      } else {
-        submitStory(values);
-        submitLocation(values);
-      }
-      formik.resetForm();
-      setTheLocation(null);
-      setTheAddress(null)
-    },
-  });
+      story,
+    };
+    if (theLocation) {
+      submitStory(values);
+    } else {
+      submitStory(values);
+      submitLocation(values);
+    }
+    setTheLocation(null);
+    setTheAddress(null);
+  };
   return (
     <div style={{ height: 'auto', width: '100%' }}>
-      <form className={'flexCentCol'} onSubmit={formik.handleSubmit}>
+      <form
+        className={'flexCentCol'}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         {theLocation === null ? (
           <>
             <label style={{ width: '174px' }} htmlFor="location">
@@ -62,8 +73,10 @@ const StoryForm = ({ theLocation, center, setTheLocation, setTheAddress, lat, ln
             <input
               type="text"
               name="location"
-              onChange={formik.handleChange}
-              value={formik.values.location}
+              onChange={(e) => {
+                setPlace(e.target.value);
+              }}
+              value={place}
             ></input>
           </>
         ) : (
@@ -76,14 +89,15 @@ const StoryForm = ({ theLocation, center, setTheLocation, setTheAddress, lat, ln
           style={{ height: '200px' }}
           id="story"
           name="story"
-          onChange={formik.handleChange}
-          value={formik.values.story}
+          onChange={(e) => {
+            setStory(e.target.value);
+          }}
+          value={story}
         ></textarea>
-        <input name="lat" value={formik.values.lat}></input>
         <button type="submit">Submit</button>
       </form>
     </div>
   );
 };
 
-export default StoryForm;
+export default StoryFormRedux;

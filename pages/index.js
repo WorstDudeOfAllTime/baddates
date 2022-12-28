@@ -11,10 +11,14 @@ export default function Home({ allLocations }) {
   const [theAddress, setTheAddress] = useState(null);
   const [locationID, setLocationID] = useState('');
   const [theLocation, setTheLocation] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   const [center, setCenter] = useState({
     lat: 39.9526,
     lng: -75.1652,
   });
+  console.log(lat);
+  console.log(lng);
   return (
     <div className={styles.container}>
       <Head>
@@ -25,11 +29,14 @@ export default function Home({ allLocations }) {
       <div className={`flexCent ${styles.contentContainer}`}>
         <div className={`flexCentCol ${styles.storyBox}`}>
           <StoryBoard
-            lat={center.lat}
-            lng={center.lng}
+            center={center}
             stories={story}
             address={theAddress}
+            setTheAddress={setTheAddress}
             theLocation={theLocation}
+            setTheLocation={setTheLocation}
+            lat={lat}
+            lng={lng}
           />
         </div>
         <div className={`flexCent ${styles.mapBox}`}>
@@ -44,6 +51,8 @@ export default function Home({ allLocations }) {
               setLocationID={setLocationID}
               setTheAddress={setTheAddress}
               setTheLocation={setTheLocation}
+              setLat={setLat}
+              setLng={setLng}
             />
           )}
         </div>

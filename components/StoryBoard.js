@@ -1,9 +1,10 @@
 import styles from './../styles/StoryBoard.module.css';
 import StoryBox from './StoryBox';
 import StoryForm from './StoryForm';
+import StoryFormRedux from './StoryFormRedux';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
-const StoryBoard = ({ stories, address, lat, lng, theLocation }) => {
+const StoryBoard = ({ stories, address, center, theLocation, setTheLocation, setTheAddress, lat, lng }) => {
   return (
     <div className={styles.storyBoardContainer}>
       <div className={`flexCentCol ${styles.whereBox}`}>
@@ -13,16 +14,20 @@ const StoryBoard = ({ stories, address, lat, lng, theLocation }) => {
         </div>
       </div>
       <div className={styles.storyBox}>
-        {stories &&
-          stories.map((story) => {
-            return <StoryBox story={story} />;
-          })}
+        <div className={styles.storyList}>
+          {stories &&
+            stories.map((story) => {
+              return <StoryBox story={story} />;
+            })}
+        </div>
         {address != null && (
-          <StoryForm
-            address={address}
+          <StoryFormRedux
+            center={center}
+            theLocation={theLocation}
+            setTheLocation={setTheLocation}
+            setTheAddress={setTheAddress}
             lat={lat}
             lng={lng}
-            theLocation={theLocation}
           />
         )}
       </div>

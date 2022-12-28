@@ -22,11 +22,12 @@ const Map = ({
   newComments,
   setTheAddress,
   setTheLocation,
+  setLat,
+  setLng
 }) => {
   const [mapPlace, setMapPlace] = useState('');
   const [currentLocation, setCurrentLocation] = useState(false);
   const [clickMarker, setClickMarker] = useState(false);
-  const [clickLatLng, setClickLatLng] = useState({ lat: 0, lng: 0 });
   const containerStyle = {
     width: '98%',
     height: '98%',
@@ -52,8 +53,7 @@ const Map = ({
     try {
       const response = await Geocode.fromAddress(address);
       const { lat, lng } = await response.results[0].geometry.location;
-      console.log(response.results[0].geometry);
-      setCenter({ lat, lng });
+      return { lat: parseFloat(lat), lng: parseFloat(lng) };
     } catch (err) {
       console.log(err);
     }
@@ -62,12 +62,16 @@ const Map = ({
   const getAddress = async (lat, long) => {
     try {
       const response = await Geocode.fromLatLng(lat, long);
-      console.log(response.results[0].formatted_address);
-      setTheAddress((prevAdd) => {
         return response.results[0].formatted_address;
-      });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const clearPlace = () => {
+    setStory([]);
+    setTheLocation(null)
+  }
   return (
     <div
       className={`flexCent`}
@@ -81,25 +85,24 @@ const Map = ({
           mapContainerStyle={containerStyle}
           center={center}
           zoom={14}
-          onClick={(e) => {
-            setStory([]);
-            setTheLocation(null);
-            getAddress(e.latLng.lat(), e.latLng.lng());
-            setClickLatLng((prevLatLng) => {
-              return { lat: e.latLng.lat(), lng: e.latLng.lng() };
-            });
+          onClick={async (e) => {
+            clearPlace();
+            setLat(prevLat => {return e.latLng.lat()});
+            setLng(prevLng => {return e.latLng.lng()});
+            const newAddy = await getAddress(e.latLng.lat(), e.latLng.lng());
+            setTheAddress(newAddy);
             setCenter((prevCenter) => {
               return { lat: e.latLng.lat(), lng: e.latLng.lng() };
             });
-            setClickMarker(true);
+            setCurrentLocation(true);
           }}
         >
           <StandaloneSearchBox>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
+                setCenter(await submitAddress(mapPlace));
                 setTheAddress(mapPlace);
-                submitAddress(mapPlace);
                 setMapPlace('');
                 setCurrentLocation(true);
               }}
@@ -111,6 +114,9 @@ const Map = ({
                 value={mapPlace}
                 onClick={(e) => {
                   setMapPlace(e.target.value);
+                  setTheLocation(null);
+                  setTheAddress(null)
+                  setClickMarker(false);
                 }}
                 onChange={(e) => {
                   setMapPlace(e.target.value);
@@ -124,7 +130,6 @@ const Map = ({
                 key={`${index}-x-${location.lng}`}
                 location={location}
                 setStory={setStory}
-                setCenter={setCenter}
                 setLocationID={setLocationID}
                 setCommentList={setCommentList}
                 newComments={newComments}
@@ -134,18 +139,10 @@ const Map = ({
             );
           })}
           {currentLocation && (
-            <Marker
+            <MarkerF
               position={{
                 lat: center.lat,
                 lng: center.lng,
-              }}
-            />
-          )}
-          {clickMarker && (
-            <MarkerF
-              position={{
-                lat: clickLatLng.lat,
-                lng: clickLatLng.lng,
               }}
             />
           )}

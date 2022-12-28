@@ -5,11 +5,10 @@ import styles from './../styles/MarkerComp.module.css';
 const MarkerComp = ({
   location,
   setStory,
-  setCenter,
   setLocationID,
   setCommentList,
   setTheAddress,
-  setTheLocation
+  setTheLocation,
 }) => {
   const [clicked, setClicked] = useState(false);
 
@@ -58,17 +57,12 @@ const MarkerComp = ({
       onClick={() => {
         setTheLocation(location);
         setClicked(!clicked);
-        console.log(location)
         dateFetcher();
         setStory((prevStory) => {
           return [location.story];
         });
         setLocationID();
         setTheAddress(location.address);
-        setCenter({
-          lat: parseFloat(location.lat),
-          lng: parseFloat(location.lng),
-        });
       }}
     />
   );
