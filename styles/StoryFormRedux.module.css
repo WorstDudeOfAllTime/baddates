@@ -1,0 +1,16 @@
+.inputs {
+  background: rgb(20, 20, 20);
+  box-shadow: 2px 2px 3px rgba(0,0,0,.5);
+  border:none;
+  border-radius: 3px;
+  padding: 6px;
+}
+.inputs:focus{
+  outline-width: 0;
+}
+.labels{
+  font-size: 19px;
+  font-weight: 800;
+  text-shadow: 1px 1px 3px rgba(0,0,0,.4);
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}

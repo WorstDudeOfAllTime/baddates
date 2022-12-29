@@ -22,8 +22,6 @@ const Map = ({
   newComments,
   setTheAddress,
   setTheLocation,
-  setLat,
-  setLng
 }) => {
   const [mapPlace, setMapPlace] = useState('');
   const [currentLocation, setCurrentLocation] = useState(false);
@@ -31,8 +29,9 @@ const Map = ({
   const containerStyle = {
     width: '98%',
     height: '98%',
-    border: '10px solid red',
-    borderBottomRightRadius: '20px',
+    border: '10px solid black',
+    borderRadius: '12px',
+    boxShadow: '4px 4px 5px rgba(0, 0, 0, .5)'
   };
   const inputStyle = {
     boxSizing: `border-box`,
@@ -87,8 +86,6 @@ const Map = ({
           zoom={14}
           onClick={async (e) => {
             clearPlace();
-            setLat(prevLat => {return e.latLng.lat()});
-            setLng(prevLng => {return e.latLng.lng()});
             const newAddy = await getAddress(e.latLng.lat(), e.latLng.lng());
             setTheAddress(newAddy);
             setCenter((prevCenter) => {

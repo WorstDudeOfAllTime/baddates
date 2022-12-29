@@ -55,6 +55,7 @@ const MarkerComp = ({
         lng: parseFloat(location.lng),
       }}
       onClick={() => {
+        console.log(location)
         setTheLocation(location);
         setClicked(!clicked);
         dateFetcher();
@@ -62,7 +63,7 @@ const MarkerComp = ({
           return [location.story];
         });
         setLocationID();
-        setTheAddress(location.address);
+        setTheAddress(location.location);
       }}
     />
   );

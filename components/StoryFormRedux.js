@@ -1,12 +1,11 @@
 import uniqueString from 'unique-string';
 import { useState } from 'react';
+import styles from './../styles/StoryFormRedux.module.css'
 const StoryFormRedux = ({
   theLocation,
   center,
   setTheLocation,
   setTheAddress,
-  lat,
-  lng,
 }) => {
   const [story, setStory] = useState('');
   const [place, setPlace] = useState('');
@@ -67,10 +66,12 @@ const StoryFormRedux = ({
       >
         {theLocation === null ? (
           <>
-            <label style={{ width: '174px' }} htmlFor="location">
+            <label className={styles.labels} style={{ width: '90%' }} htmlFor="location">
               Enter Place
             </label>
             <input
+            className={styles.inputs}
+            style={{width: '90%', height:'auto', fontSize:'20px'}}
               type="text"
               name="location"
               onChange={(e) => {
@@ -82,11 +83,12 @@ const StoryFormRedux = ({
         ) : (
           <></>
         )}
-        <label style={{ width: '174px' }} htmlFor="story">
+        <label className={styles.labels} style={{ width: '90%' }} htmlFor="story">
           Enter your Story
         </label>
         <textarea
-          style={{ height: '200px' }}
+        className={styles.inputs}
+          style={{ height: '200px', width: '90%', fontSize: '17px' }}
           id="story"
           name="story"
           onChange={(e) => {

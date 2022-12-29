@@ -1,34 +1,50 @@
 .storyBoardContainer {
-height: 100%;
-width: 100%;
-}
-
-.whereBox{
-height: 30%;
-width: 100%;
-}
-
-.whereBox h2{
-  margin: 0;
-}
-
-.locationBox{
-  height: 80%;
+  height: 100%;
   width: 100%;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  color: white;
-  font-size: 20px;
+}
+
+.whereBox {
+  height: auto;
+  width: 100%;
+}
+.logoBox {
+  height: auto;
+  width: auto;
+}
+.whereBox h2 {
+  margin: 10px 0px 10px 0px;
+  font-size: 23px;
+  font-weight: 800;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.locationBox {
+  height: auto;
+  width: 100%;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  color: black;
   display: flex;
   align-items: center;
+  font-size: 21px;
+  font-weight: 800;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .storyBox {
   height: 70%;
+  padding: 0px 10px;
   width: 100%;
-  color: white;
+  color: black;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.storyList{
-  height: 40%;
+.storyList {
+  height: auto;
+  max-height: 55%;
   width: 100%;
   overflow-y: auto;
 }

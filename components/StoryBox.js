@@ -3,9 +3,9 @@ import CommentForm from './CommentForm';
 const StoryBox = ({ story, comments }) => {
   return (
     <div
-      style={{ height: 'auto', width: '90%', borderBottom: '2px solid white' }}
+      style={{ height: 'auto', width: '90%', borderBottom: '2px solid black' }}
     >
-      {story && <p style={{ color: 'white' }}>{story.story}</p>}
+      {story && <p style={{ color: 'black' }}>{story.story}</p>}
       {comments &&
         comments.map((comment) => {
           return <Comment comment={comment} />;
