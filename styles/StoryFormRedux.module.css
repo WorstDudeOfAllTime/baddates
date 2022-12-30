@@ -1,9 +1,17 @@
+.theForm{
+  height: 100%;
+}
 .inputs {
-  background: rgb(20, 20, 20);
+  background: whitesmoke;
   box-shadow: 2px 2px 3px rgba(0,0,0,.5);
+  color: black;
   border:none;
   border-radius: 3px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   padding: 6px;
+  resize: none;
+  margin: 10px 0px;
 }
 .inputs:focus{
   outline-width: 0;
@@ -13,4 +21,19 @@
   font-weight: 800;
   text-shadow: 1px 1px 3px rgba(0,0,0,.4);
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+.buttons{
+  margin-top: 10px;
+  background:  rgb(0, 0, 0);
+  border: none;
+  width: 90%;
+  font-size: 17px;
+  box-shadow: 2px 2px 3px rgba(0,0,0,.5);
+  cursor: pointer;
+  border: 3px solid black;
+  transition: all ease-in-out .1s;
+}
+.buttons:hover{
+  background:whitesmoke;
+  color: black;
 }

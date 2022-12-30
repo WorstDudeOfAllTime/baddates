@@ -1,6 +1,5 @@
 import { MarkerF } from '@react-google-maps/api';
-import { useEffect, useState } from 'react';
-import heart from './imgs/heart.png';
+import { useState } from 'react';
 import styles from './../styles/MarkerComp.module.css';
 const MarkerComp = ({
   location,
@@ -49,7 +48,12 @@ const MarkerComp = ({
   };
   return (
     <MarkerF
+      key={'heart-tattoo'}
       animation={2}
+      icon={{
+        url: `https://i.imgur.com/8yuSM05.png`,
+        scaledSize: new google.maps.Size(65, 65)
+      }}
       position={{
         lat: parseFloat(location.lat),
         lng: parseFloat(location.lng),
@@ -65,7 +69,9 @@ const MarkerComp = ({
         setLocationID();
         setTheAddress(location.location);
       }}
-    />
+    >
+      <div className={styles.heartMarker}></div>
+    </MarkerF>
   );
 };
 

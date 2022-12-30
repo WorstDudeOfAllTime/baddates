@@ -1,6 +1,6 @@
 import uniqueString from 'unique-string';
 import { useState } from 'react';
-import styles from './../styles/StoryFormRedux.module.css'
+import styles from './../styles/StoryFormRedux.module.css';
 const StoryFormRedux = ({
   theLocation,
   center,
@@ -56,9 +56,9 @@ const StoryFormRedux = ({
     setTheAddress(null);
   };
   return (
-    <div style={{ height: 'auto', width: '100%' }}>
+    <div style={{ height: '100%', width: '100%', marginTop: '15px' }}>
       <form
-        className={'flexCentCol'}
+        className={`flexCentCol ${styles.theForm}`}
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
@@ -66,12 +66,14 @@ const StoryFormRedux = ({
       >
         {theLocation === null ? (
           <>
-            <label className={styles.labels} style={{ width: '90%' }} htmlFor="location">
-              Enter Place
-            </label>
             <input
-            className={styles.inputs}
-            style={{width: '90%', height:'auto', fontSize:'20px'}}
+              placeholder="Enter Place"
+              className={styles.inputs}
+              style={{
+                width: '90%',
+                height: 'auto',
+                fontSize: '16px',
+              }}
               type="text"
               name="location"
               onChange={(e) => {
@@ -83,12 +85,15 @@ const StoryFormRedux = ({
         ) : (
           <></>
         )}
-        <label className={styles.labels} style={{ width: '90%' }} htmlFor="story">
-          Enter your Story
-        </label>
         <textarea
-        className={styles.inputs}
-          style={{ height: '200px', width: '90%', fontSize: '17px' }}
+          placeholder="Enter Your Story"
+          className={styles.inputs}
+          style={{
+            height: '60%',
+            width: '90%',
+            fontSize: '16px',
+            borderRadius: '0px',
+          }}
           id="story"
           name="story"
           onChange={(e) => {
@@ -96,7 +101,9 @@ const StoryFormRedux = ({
           }}
           value={story}
         ></textarea>
-        <button type="submit">Submit</button>
+        <button className={styles.buttons} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

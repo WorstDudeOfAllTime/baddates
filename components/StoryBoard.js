@@ -14,7 +14,7 @@ const StoryBoard = ({
   setTheAddress,
 }) => {
   return (
-    <div style={{ paddingTop: '15px' }} className={styles.storyBoardContainer}>
+    <div style={{ paddingTop: '15px' }} className={styles.storyBoardContainer} key={'board-story-x'}>
       <div className={`flexCent ${styles.logoBox}`}>
         <Image
           style={{
@@ -26,19 +26,10 @@ const StoryBoard = ({
           height={70}
         />
       </div>
-      <div className={`flexCentCol ${styles.whereBox}`}>
-        <h2>Location</h2>
-        <div className={styles.locationBox}>
+      <div key={'board-where-x'} className={`flexCentCol ${styles.whereBox}`} >
           <p style={{ marginLeft: '5px' }}>{address}</p>
-        </div>
       </div>
-      <div className={styles.storyBox}>
-        <div className={styles.storyList}>
-          {stories &&
-            stories.map((story) => {
-              return <StoryBox story={story} />;
-            })}
-        </div>
+      <div key={'board-story-x'} className={styles.storyBox}>
         {address != null && (
           <StoryFormRedux
             center={center}

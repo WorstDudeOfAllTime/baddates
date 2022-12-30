@@ -27,26 +27,22 @@ const Map = ({
   const [currentLocation, setCurrentLocation] = useState(false);
   const [clickMarker, setClickMarker] = useState(false);
   const containerStyle = {
-    width: '98%',
-    height: '98%',
-    border: '10px solid black',
-    borderRadius: '12px',
-    boxShadow: '4px 4px 5px rgba(0, 0, 0, .5)'
+    width: '100%',
+    height: '100%',
   };
   const inputStyle = {
     boxSizing: `border-box`,
-    border: `1px solid transparent`,
-    width: `240px`,
-    height: `32px`,
+    width: `280px`,
+    height: `40px`,
     padding: `0 12px`,
     borderRadius: `3px`,
-    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.5)`,
     fontSize: `14px`,
     outline: `none`,
     textOverflow: `ellipses`,
     position: 'absolute',
     top: '10px',
-    right: '10px',
+    right: '60px',
   };
   const submitAddress = async (address) => {
     try {
@@ -68,6 +64,7 @@ const Map = ({
   };
 
   const clearPlace = () => {
+    setTheAddress(null)
     setStory([]);
     setTheLocation(null)
   }
@@ -98,6 +95,7 @@ const Map = ({
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
+                clearPlace();
                 setCenter(await submitAddress(mapPlace));
                 setTheAddress(mapPlace);
                 setMapPlace('');
@@ -111,8 +109,6 @@ const Map = ({
                 value={mapPlace}
                 onClick={(e) => {
                   setMapPlace(e.target.value);
-                  setTheLocation(null);
-                  setTheAddress(null)
                   setClickMarker(false);
                 }}
                 onChange={(e) => {

@@ -1,9 +1,10 @@
-.leaningHearts{
-  animation-name: leaningHeart;
-  animation-duration: 3s  ;
+.heartMarker{
+  animation: leaningHeart;
+  animation-duration: .4s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes leaningHeart{
-  from {transform: rotate(90deg)}
-  to {transform: rotate(170deg)}
+  from {margin-top: 0px}
+  to {margin-top:20px}
 }

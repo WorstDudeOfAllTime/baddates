@@ -27,9 +27,8 @@ const CommentForm = ({date_Id}) => {
   return (
     <div className={styles.formBoxContainer}>
       <form className={`flexCentCol ${styles.formBoxContainer}`} onSubmit={formik.handleSubmit}>
-      <label></label>
-      <textarea className={styles.commentBox} id="commment" name="comment" onChange={formik.handleChange} value={formik.values.comment} placeholder="Enter your comment..."></textarea>
-      <button type="submit">Submit Comment</button></form>
+      <textarea className={styles.commentBox} id="commment" name="comment" onChange={formik.handleChange} value={formik.values.comment} placeholder="Enter your comment"></textarea>
+      <button className={styles.buttons} type="submit">Submit Comment</button></form>
     </div>
   )
 }
