@@ -6,7 +6,6 @@ import CommentForm from './CommentForm';
 import logo from './../components/imgs/logo-no-background.png';
 import Image from 'next/image';
 const StoryBoard = ({
-  stories,
   address,
   center,
   theLocation,
@@ -23,7 +22,7 @@ const StoryBoard = ({
           }}
           src={logo}
           alt="logo"
-          height={70}
+          width={200}
         />
       </div>
       <div key={'board-where-x'} className={`flexCentCol ${styles.whereBox}`} >

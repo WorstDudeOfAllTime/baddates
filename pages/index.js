@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Map from '../components/Map';
 import StoryBoard from '../components/StoryBoard';
 import StoryBox from '../components/StoryBox';
+import StoryFormRedux from '../components/StoryFormRedux';
 export default function Home({ allLocations }) {
   const [story, setStory] = useState([]);
   const [markers, setMarkers] = useState(allLocations.data);
@@ -31,6 +32,7 @@ export default function Home({ allLocations }) {
               setTheAddress={setTheAddress}
               theLocation={theLocation}
               setTheLocation={setTheLocation}
+              children={<StoryFormRedux />}
             />
           </div>
           <div className={styles.theMap}>
@@ -50,10 +52,19 @@ export default function Home({ allLocations }) {
           </div>
 
           <div className={`flexCentCol ${styles.storyArea}`}>
-            {story &&
-              story.map((theStory) => {
-                return <StoryBox story={theStory} />;
-              })}
+            <h2>Stories</h2>
+            <div className={`flexCentCol ${styles.storyBill}`}>
+              {story &&
+                story
+                  .sort((a, b) => {
+                    var c = new Date(a.date);
+                    var d = new Date(b.date);
+                    return d - c;
+                  })
+                  .map((theStory) => {
+                    return <StoryBox story={theStory} />;
+                  })}
+            </div>
           </div>
         </div>
       </div>

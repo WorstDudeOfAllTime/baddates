@@ -47,6 +47,13 @@
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 }
+.storyBill{
+  border-top: 1px solid black;
+  justify-content: start !important;
+  height: 90%;
+  width: 100%;
+  overflow-y: auto;
+}
 
 @keyframes fadeIn {
   from {opacity: 0}

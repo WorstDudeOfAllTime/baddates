@@ -1,7 +1,10 @@
-import clientPromise from './../../lib/mongodb'
+import CommentModel from './../../Models/CommentModel';
 export default async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db('bad-dates-db');
-  let bodyObject = req.body
-  let myComments = await db.collection('comments').insertOne(bodyObject);
+  try {
+    const comment = new CommentModel(req.body);
+    comment.save();
+    res.json({data: comment});
+  } catch(err) {
+    console.log(err)
+  }
 }

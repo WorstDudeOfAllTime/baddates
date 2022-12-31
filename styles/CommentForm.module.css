@@ -16,6 +16,7 @@
   color: black;
   resize: none;
   border-bottom: 2px solid black;
+  padding: 0px 20px 0px 5px;
 }
 .buttons{
   margin-top: 8px;

@@ -1,6 +1,10 @@
-import { useFormik } from "formik";
-import styles from './../styles/CommentForm.module.css'
-const CommentForm = ({date_Id}) => {
+import styles from './../styles/CommentForm.module.css';
+import penIcon from './imgs/penicon.png';
+import Image from 'next/image';
+import {useState} from 'react';
+
+const CommentForm = ({ date_Id }) => {
+  const [comment, setComment] = useState('')
   const submitComment = async (values) => {
     try {
       const data = await fetch('/api/writecomment', {
@@ -14,23 +18,41 @@ const CommentForm = ({date_Id}) => {
       console.log(err);
     }
   };
-  const formik = useFormik({
-    initialValues: {
-      date_Id,
-      comment: '',
+
+  const handleSubmit = (comment, date_Id) => {
+    const commentObj = {
       date: Date.now(),
-    },
-    onSubmit:(values) => {
-      submitComment(values);
-    } 
-  })
+      date_Id,
+      comment
+    }
+    submitComment(commentObj);
+  }
   return (
     <div className={styles.formBoxContainer}>
-      <form className={`flexCentCol ${styles.formBoxContainer}`} onSubmit={formik.handleSubmit}>
-      <textarea className={styles.commentBox} id="commment" name="comment" onChange={formik.handleChange} value={formik.values.comment} placeholder="Enter your comment"></textarea>
-      <button className={styles.buttons} type="submit">Submit Comment</button></form>
+      <form
+        className={`flexCentCol ${styles.formBoxContainer}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(comment, date_Id);
+        }}
+      >
+        {' '}
+        <textarea
+          className={styles.commentBox}
+          id="commment"
+          name="comment"
+          onChange={(e)=>{
+            setComment(e.target.value);
+          }}
+          value={comment}
+          placeholder="Enter your comment"
+        ></textarea>
+        <button className={styles.buttons} type="submit">
+          Submit Comment
+        </button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
 export default CommentForm;
