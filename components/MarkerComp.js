@@ -37,11 +37,13 @@ const MarkerComp = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          commentID: `${location._id}`,
+          location_Id: `${location.location_Id}`,
         }),
       });
       let allComments = await commentResponse.json();
-      setCommentList(allComments);
+      setCommentList((prevComments) => {
+        return allComments;
+      });
     } catch (err) {
       console.log(err);
     }
@@ -52,20 +54,20 @@ const MarkerComp = ({
       animation={2}
       icon={{
         url: `https://i.imgur.com/8yuSM05.png`,
-        scaledSize: new google.maps.Size(65, 65)
+        scaledSize: new google.maps.Size(65, 65),
       }}
       position={{
         lat: parseFloat(location.lat),
         lng: parseFloat(location.lng),
       }}
       onClick={() => {
-        console.log(location)
-        setTheLocation(location);
-        setClicked(!clicked);
-        dateFetcher();
         setStory((prevStory) => {
           return [location.story];
         });
+        setTheLocation(location);
+        setClicked(!clicked);
+        dateFetcher();
+        commentFetcher();
         setLocationID();
         setTheAddress(location.location);
       }}

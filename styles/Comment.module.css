@@ -1,9 +1,15 @@
 .commentBox{
-  border-bottom: 1px solid whitesmoke;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom-left-radius: 10px;
   display: flex;
   justify-content: flex-end;
-  width: 90%;
+  width: auto;
+  min-width: 40%;
+  height: auto;
+  word-wrap: normal;
 }
 .commentBox p{
   font-size: 12px;
+  margin: 8px 3px;
 }

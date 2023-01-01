@@ -1,11 +1,10 @@
 import mongoDB from './../../lib/mongodb';
 import CommentModel from './../../Models/CommentModel';
 export default async function handler(req, res) {
-  console.log(req.body)
   try {
     switch (req.method) {
       case 'POST':
-        let myComments = await CommentModel.find({ date_Id: req.body.date_Id });
+        let myComments = await CommentModel.find({ location_Id: req.body.location_Id});
         res.send(myComments);
     }
   } catch (err) {

@@ -1,9 +1,7 @@
 import styles from './../styles/CommentForm.module.css';
-import penIcon from './imgs/penicon.png';
-import Image from 'next/image';
 import {useState} from 'react';
 
-const CommentForm = ({ date_Id }) => {
+const CommentForm = ({ date_Id, location }) => {
   const [comment, setComment] = useState('')
   const submitComment = async (values) => {
     try {
@@ -19,10 +17,11 @@ const CommentForm = ({ date_Id }) => {
     }
   };
 
-  const handleSubmit = (comment, date_Id) => {
+  const handleSubmit = (comment, date_Id, location) => {
     const commentObj = {
       date: Date.now(),
       date_Id,
+      location_Id: location,
       comment
     }
     submitComment(commentObj);
@@ -33,7 +32,7 @@ const CommentForm = ({ date_Id }) => {
         className={`flexCentCol ${styles.formBoxContainer}`}
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(comment, date_Id);
+          handleSubmit(comment, date_Id, location);
         }}
       >
         {' '}

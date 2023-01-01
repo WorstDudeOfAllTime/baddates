@@ -1,4 +1,6 @@
 .storyBox {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 3px;
   width: 100%;
@@ -9,6 +11,7 @@
   animation-name: fadeIn;
   animation-duration: .4s;
   transition: all ease-in-out .4s;
+  align-items: flex-end !important;
 }
 
 .theStory{

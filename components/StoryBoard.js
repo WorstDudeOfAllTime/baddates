@@ -5,6 +5,11 @@ import Comment from './Comment';
 import CommentForm from './CommentForm';
 import logo from './../components/imgs/logo-no-background.png';
 import Image from 'next/image';
+import { Pacifico } from '@next/font/google';
+const pacifico = Pacifico({
+  weight: '400',
+  subsets: ['cyrillic'],
+});
 const StoryBoard = ({
   address,
   center,
@@ -13,7 +18,11 @@ const StoryBoard = ({
   setTheAddress,
 }) => {
   return (
-    <div style={{ paddingTop: '15px' }} className={styles.storyBoardContainer} key={'board-story-x'}>
+    <div
+      style={{ paddingTop: '15px' }}
+      className={styles.storyBoardContainer}
+      key={'board-story-x'}
+    >
       <div className={`flexCent ${styles.logoBox}`}>
         <Image
           style={{
@@ -25,8 +34,8 @@ const StoryBoard = ({
           width={200}
         />
       </div>
-      <div key={'board-where-x'} className={`flexCentCol ${styles.whereBox}`} >
-          <p style={{ marginLeft: '5px' }}>{address}</p>
+      <div key={'board-where-x'} className={`flexCentCol ${pacifico.className} ${styles.whereBox}`}>
+        <h2 style={{ marginLeft: '5px' }}>{address}</h2>
       </div>
       <div key={'board-story-x'} className={styles.storyBox}>
         {address != null && (

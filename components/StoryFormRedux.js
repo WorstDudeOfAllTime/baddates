@@ -9,7 +9,6 @@ const StoryFormRedux = ({
 }) => {
   const [story, setStory] = useState('');
   const [place, setPlace] = useState('');
-  console.log(theLocation);
   const submitStory = async (values) => {
     try {
       const data = await fetch('/api/writedate', {
