@@ -34,3 +34,10 @@
   background:whitesmoke;
   color: black;
 }
+
+
+@media screen and (max-width: 800px){
+  .commentBox {
+    border-bottom: none;
+  }
+}

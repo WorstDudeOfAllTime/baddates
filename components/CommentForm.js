@@ -32,6 +32,7 @@ const CommentForm = ({ date_Id, location }) => {
         className={`flexCentCol ${styles.formBoxContainer}`}
         onSubmit={(e) => {
           e.preventDefault();
+          setComment('')
           handleSubmit(comment, date_Id, location);
         }}
       >

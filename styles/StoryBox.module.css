@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 47%;
   padding: 3px;
-  width: 100%;
   color: black;
   font-weight: 500;
   font-size: 18px;
@@ -27,6 +27,10 @@
 .theStory:hover{
   box-shadow: 3px 3px 3px rgba(0,0,0,.6)
 }
+.storyContainer{
+  width: 100%;
+  height: 100%;
+}
 @keyframes fadeIn{
   from{opacity:0}
   to{opacity:1}
@@ -35,4 +39,15 @@
   0%{margin-top: 0px;}
   50%{margin-top: -15px}
   100%{margin-top: 0px;}
+}
+
+@media screen and (max-width: 800px){
+  .storyBox{
+    border: none;
+    padding: 10px;
+    height: auto;
+  }
+  .storyBox h2{
+    font-size: .5em;
+  }
 }

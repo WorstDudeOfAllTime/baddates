@@ -3,19 +3,17 @@ import CommentForm from './CommentForm';
 import styles from './../styles/StoryBox.module.css';
 import { useEffect, useState } from 'react';
 const StoryBox = ({ story, comments }) => {
-  console.log(story);
   return (
     <div
       className={`${styles.storyBox}`}
-      style={{ height: '90%', width: '90%', borderBottom: '2px solid black' }}
     >
       {story && (
-        <>
+        <div className={styles.storyContainer}>
           <h6 style={{ margin: '3px' }}>{story.date.slice(0, 10)}</h6>
           <p className={styles.theStory} style={{ color: 'black' }}>
             {story.story}
           </p>
-        </>
+        </div>
       )}
       {story && comments &&
         comments

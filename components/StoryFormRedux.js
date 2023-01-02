@@ -55,7 +55,7 @@ const StoryFormRedux = ({
     setTheAddress(null);
   };
   return (
-    <div style={{ height: '100%', width: '100%', marginTop: '15px' }}>
+    <div className={styles.formWrapper}>
       <form
         className={`flexCentCol ${styles.theForm}`}
         onSubmit={(e) => {
@@ -86,7 +86,7 @@ const StoryFormRedux = ({
         )}
         <textarea
           placeholder="Enter Your Story"
-          className={styles.inputs}
+          className={`${styles.inputs} ${styles.storyIn}`}
           style={{
             height: '60%',
             width: '90%',

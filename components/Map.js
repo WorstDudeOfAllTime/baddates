@@ -32,8 +32,8 @@ const Map = ({
   };
   const inputStyle = {
     boxSizing: `border-box`,
-    width: `280px`,
-    height: `40px`,
+    width: `40%`,
+    height: `50px`,
     padding: `0 12px`,
     borderRadius: `3px`,
     boxShadow: `0 2px 6px rgba(0, 0, 0, 0.5)`,
@@ -41,8 +41,8 @@ const Map = ({
     outline: `none`,
     textOverflow: `ellipses`,
     position: 'absolute',
-    top: '10px',
-    right: '60px',
+    bottom: '10px',
+    left: '10px',
   };
   const submitAddress = async (address) => {
     try {

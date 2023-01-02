@@ -1,3 +1,8 @@
+.formWrapper {
+  height: 100%;
+  width: 100%;
+  margin-top: 0px;
+}
 .theForm{
   height: 100%;
 }
@@ -11,7 +16,7 @@
   border-bottom-right-radius: 0px;
   padding: 6px;
   resize: none;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 .inputs:focus{
   outline-width: 0;
@@ -36,4 +41,24 @@
 .buttons:hover{
   background:whitesmoke;
   color: black;
+}
+
+@media screen and (max-width: 800px) {
+  .formWrapper {
+    margin-top: 0px;
+  }
+  .theForm{
+    width: 100%;
+  }
+  .inputs {
+    width: 100% !important;
+    margin: 0px !important;
+  }
+  .storyIn{
+    border-top: 2px solid black;
+    height: 40% !important;
+  }
+  .buttons{
+    font-size: 13px;
+  }
 }

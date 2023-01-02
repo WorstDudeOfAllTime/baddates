@@ -5,10 +5,10 @@ import Map from '../components/Map';
 import StoryBoard from '../components/StoryBoard';
 import StoryBox from '../components/StoryBox';
 import StoryFormRedux from '../components/StoryFormRedux';
-import { Pacifico } from '@next/font/google';
-const pacifico = Pacifico({
+import { Fredoka_One} from '@next/font/google';
+const fred = Fredoka_One({
   weight: '400',
-  subsets: ['cyrillic'],
+  subsets: ['latin'],
 });
 
 export default function Home({ allLocations }) {
@@ -60,7 +60,7 @@ export default function Home({ allLocations }) {
           </div>
 
           <div
-            className={`flexCentCol ${pacifico.className} ${styles.storyArea}`}
+            className={`flexCentCol ${fred.className} ${styles.storyArea}`}
           >
             <h2>Stories</h2>
             <div className={`flexCentCol ${styles.storyBill}`}>
