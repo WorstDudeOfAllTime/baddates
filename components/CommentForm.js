@@ -46,6 +46,7 @@ const CommentForm = ({ date_Id, location }) => {
           }}
           value={comment}
           placeholder="Enter your comment"
+          required={true}
         ></textarea>
         <button className={styles.buttons} type="submit">
           Submit Comment
