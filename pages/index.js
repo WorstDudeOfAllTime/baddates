@@ -6,6 +6,7 @@ import StoryBoard from '../components/StoryBoard';
 import StoryBox from '../components/StoryBox';
 import StoryFormRedux from '../components/StoryFormRedux';
 import Disclaimer from '../components/Disclaimer';
+import { getLocations } from './api/findlocations';
 import { Fredoka_One } from '@next/font/google';
 const fred = Fredoka_One({
   weight: '400',
@@ -14,7 +15,7 @@ const fred = Fredoka_One({
 
 export default function Home({ allLocations }) {
   const [story, setStory] = useState(null);
-  const [markers, setMarkers] = useState(allLocations.data);
+  const [markers, setMarkers] = useState(JSON.parse(allLocations));
   const [isLoaded, setIsLoaded] = useState(false);
   const [theAddress, setTheAddress] = useState(null);
   const [locationID, setLocationID] = useState('');
@@ -98,8 +99,8 @@ export default function Home({ allLocations }) {
 }
 
 export async function getServerSideProps() {
-  let response = await fetch('http:/localhost:3000/api/findlocations');
-  let allLocations = await response.json();
+  const response = await getLocations();
+  const allLocations = await JSON.stringify(response);
   return {
     props: { allLocations },
   };
