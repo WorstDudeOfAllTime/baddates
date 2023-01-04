@@ -1,5 +1,5 @@
 import uniqueString from 'unique-string';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './../styles/StoryFormRedux.module.css';
 const StoryFormRedux = ({
   theLocation,
@@ -7,8 +7,14 @@ const StoryFormRedux = ({
   setTheLocation,
   setTheAddress,
 }) => {
+  const [successMessage, setSuccessMessage] = useState('');
   const [story, setStory] = useState('');
   const [place, setPlace] = useState('');
+  useEffect(() => {
+    setTimeout(() => {
+      setSuccessMessage('')
+    }, 4000)
+  }, successMessage)
   const submitStory = async (values) => {
     try {
       const data = await fetch('/api/writedate', {
@@ -61,6 +67,7 @@ const StoryFormRedux = ({
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
+          setSuccessMessage('Story Submitted!')
         }}
       >
         {theLocation === null ? (
@@ -68,17 +75,13 @@ const StoryFormRedux = ({
             <input
               placeholder="Enter Place"
               className={styles.inputs}
-              style={{
-                width: '90%',
-                height: 'auto',
-                fontSize: '16px',
-              }}
               type="text"
               name="location"
               onChange={(e) => {
                 setPlace(e.target.value);
               }}
               value={place}
+              required={true}
             ></input>
           </>
         ) : (
@@ -87,23 +90,19 @@ const StoryFormRedux = ({
         <textarea
           placeholder="Enter Your Story"
           className={`${styles.inputs} ${styles.storyIn}`}
-          style={{
-            height: '60%',
-            width: '90%',
-            fontSize: '16px',
-            borderRadius: '0px',
-          }}
           id="story"
           name="story"
           onChange={(e) => {
             setStory(e.target.value);
           }}
           value={story}
+          required={true}
         ></textarea>
         <button className={styles.buttons} type="submit">
           Submit
         </button>
       </form>
+      <p>{successMessage}</p>
     </div>
   );
 };

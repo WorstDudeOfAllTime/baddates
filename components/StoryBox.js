@@ -23,7 +23,7 @@ const StoryBox = ({ story, comments }) => {
             }
           })
           .map((comment) => {
-            return <Comment comment={comment} />;
+            return <Comment key={`0x${Math.floor(Math.random() * 1000).toString()}0x`} comment={comment} />;
           })}
       <CommentForm
         date_Id={story && story.date_Id}

@@ -17,15 +17,16 @@
   padding: 6px;
   resize: none;
   margin: 5px 0px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .inputs:focus{
   outline-width: 0;
 }
-.labels{
-  font-size: 19px;
-  font-weight: 800;
-  text-shadow: 1px 1px 3px rgba(0,0,0,.4);
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+.storyIn{
+  height: 60%;
 }
 .buttons{
   margin-top: 10px;
@@ -37,6 +38,10 @@
   cursor: pointer;
   border: 3px solid black;
   transition: all ease-in-out .1s;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .buttons:hover{
   background:whitesmoke;

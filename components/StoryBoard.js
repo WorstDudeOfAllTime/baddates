@@ -30,7 +30,7 @@ const StoryBoard = ({
               background: 'black',
               boxShadow: '2px 2px 4px rgba(0,0,0, .8)',
               height: 'auto',
-              width: '100%',
+              width: '95%',
             }}
             src={logo}
             alt="logo"

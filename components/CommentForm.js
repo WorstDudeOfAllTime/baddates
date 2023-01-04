@@ -1,6 +1,6 @@
 import styles from './../styles/CommentForm.module.css';
 import {useState} from 'react';
-
+let filter = require('leo-profanity')
 const CommentForm = ({ date_Id, location }) => {
   const [comment, setComment] = useState('')
   const submitComment = async (values) => {
@@ -22,7 +22,7 @@ const CommentForm = ({ date_Id, location }) => {
       date: Date.now(),
       date_Id,
       location_Id: location,
-      comment
+      comment: filter.clean(comment)
     }
     submitComment(commentObj);
   }
