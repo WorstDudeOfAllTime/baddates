@@ -14,7 +14,7 @@ const StoryFormRedux = ({
     setTimeout(() => {
       setSuccessMessage('')
     }, 4000)
-  }, successMessage)
+  }, [successMessage])
   const submitStory = async (values) => {
     try {
       const data = await fetch('/api/writedate', {
