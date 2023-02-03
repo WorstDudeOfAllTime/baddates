@@ -1,6 +1,9 @@
 import styles from './../styles/CommentForm.module.css';
 import {useState} from 'react';
 let filter = require('leo-profanity')
+
+
+
 const CommentForm = ({ date_Id, location }) => {
   const [comment, setComment] = useState('')
   const submitComment = async (values) => {

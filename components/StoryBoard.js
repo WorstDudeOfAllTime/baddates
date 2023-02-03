@@ -1,8 +1,6 @@
 import styles from './../styles/StoryBoard.module.css';
-import StoryBox from './StoryBox';
 import StoryFormRedux from './StoryFormRedux';
-import Comment from './Comment';
-import CommentForm from './CommentForm';
+
 import logo from './../components/imgs/logo-no-background.png';
 import Image from 'next/image';
 import { Fredoka_One } from '@next/font/google';
@@ -28,9 +26,8 @@ const StoryBoard = ({
           <Image
             style={{
               background: 'black',
-              boxShadow: '2px 2px 4px rgba(0,0,0, .8)',
               height: 'auto',
-              width: '95%',
+              width: '100%',
             }}
             src={logo}
             alt="logo"
